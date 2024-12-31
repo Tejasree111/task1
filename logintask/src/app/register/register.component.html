@@ -1,0 +1,148 @@
+
+
+<mat-card>
+  <mat-card-header class="register_header">
+    <mat-card-title class="register_title">
+      <h1>Registration form</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="regForm" (ngSubmit)="submit()">
+      <div>
+        <mat-form-field appearance="fill">
+          <input
+            type="text"
+            formControlName="fname"
+            matInput
+            placeholder="firstname"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              (regForm.get('fname')?.touched &&
+                regForm.get('fname')?.invalid) ||
+              (submitted && regForm.get('fname')?.invalid)
+            "
+          >
+            <div *ngIf="regForm.get('fname')?.errors?.['required']">
+              Firstname is required**
+            </div>
+          </div>
+        </mat-form-field >
+        <br />
+        <mat-form-field appearance="fill">
+          <input
+            type="text"
+            formControlName="lname"
+            matInput
+            placeholder="lastname"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              (regForm.get('lname')?.touched &&
+                regForm.get('lname')?.invalid) ||
+              (submitted && regForm.get('lname')?.invalid)
+            "
+          >
+            <div *ngIf="regForm.get('lname')?.errors?.['required']">
+              Lastname is required**
+            </div>
+          </div>
+        </mat-form-field >
+        <br />
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            placeholder="Email"
+            type="email"
+            formControlName="email"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              (regForm.get('email')?.touched &&
+                regForm.get('email')?.invalid) ||
+              (submitted && regForm.get('email')?.invalid)
+            "
+          >
+            <div *ngIf="regForm.get('email')?.errors?.['required']">
+              email is required**
+            </div>
+            <div *ngIf="regForm.get('email')?.errors?.['email']">
+              invalid email**
+            </div>
+          </div>
+        </mat-form-field>
+
+        <br />
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            placeholder="Password"
+            type="password"
+            formControlName="password"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              (regForm.get('password')?.touched &&
+                regForm.get('password')?.invalid) ||
+              (submitted && regForm.get('password')?.invalid)
+            "
+          >
+            <div *ngIf="regForm.get('password')?.errors?.['required']">
+                password is required**
+            </div>
+            <div *ngIf="regForm.get('password')?.errors?.['minlength']">
+                password must be at least 6 characters**
+            </div>
+          </div>
+        </mat-form-field>
+        <br />
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            placeholder="Confirm your Password"
+            type="password"
+            formControlName="cpassword"
+          />
+
+          <div
+            class="text-danger"
+            *ngIf="
+              (regForm.get('cpassword')?.touched &&
+                regForm.get('cpassword')?.invalid) ||
+              (submitted && regForm.get('cpassword')?.invalid)
+            "
+          >
+            <div *ngIf="regForm.get('cpassword')?.errors?.['missmatch']">
+                password is required**
+            </div>
+
+          </div>
+
+        </mat-form-field>
+        <br />
+        <div class="div_button">
+          <button mat-raised-button color="primary" type="submit">
+            Register
+          </button>
+          <button
+            class="reset_button"
+            mat-raised-button
+            color="basic"
+            type="button"
+            (click)="reset()"
+          >
+            Reset
+          </button>
+        </div>
+
+        <br />
+        Already have any account?
+        <a  href="login" class="alog">Login</a>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

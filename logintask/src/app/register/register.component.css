@@ -1,0 +1,18 @@
+.alog{
+    /* margin:4px; */
+}
+.register_header{
+    text-align: center;
+    font-size: 40px;
+    justify-content: center;
+}
+.reset_button{
+    margin: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.div_button{
+    align-items: space-between;
+}
