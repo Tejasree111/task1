@@ -1,5 +1,164 @@
+<div class="register-container">
+  <mat-card>
+    <mat-card-header class="register_header">
+      <mat-card-title class="register_title">
+        <h1>{{ isEditMode ? "Edit User" : "Registration Form" }}</h1>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="regForm" (ngSubmit)="submit()">
+        <div>
+          <div *ngIf="!isEditMode">
+            <input
+              type="radio"
+              id="User"
+              name="type"
+              value="User"
+              formControlName="type"
+            />
+            <label for="User">User</label>
+            <input 
+              type="radio"
+              id="Admin"
+              name="type"
+              value="Admin"
+              formControlName="type"
+            />
+            <label for="Admin">Admin</label>
+            <br />
+            <br />
+          </div>
+          <!-- First Name -->
+          <mat-form-field>
+            <input type="text" formControlName="fname" matInput placeholder="first name"/>
+            </mat-form-field>
 
+          <div
+            class="text-danger"
+            *ngIf="
+              regForm.get('fname')?.touched && regForm.get('fname')?.invalid
+            "
+          >
+            <div *ngIf="regForm.get('fname')?.errors?.['required']">
+              Firstname is required**
+            </div>
+          </div>
+          <br />
 
+          <!-- Last Name -->
+          <mat-form-field>
+            <input type="text" formControlName="lname" matInput placeholder="Last name"/>
+            </mat-form-field>
+
+          <div
+            class="text-danger"
+            *ngIf="
+              regForm.get('lname')?.touched && regForm.get('lname')?.invalid
+            "
+          >
+            <div *ngIf="regForm.get('lname')?.errors?.['required']">
+              Lastname is required**
+            </div>
+          </div>
+
+          <br />
+
+          <!-- Email -->
+          <mat-form-field>
+            <input type="email" formControlName="email" matInput placeholder="enter your email..!!"/>
+            </mat-form-field>
+          <div
+            class="text-danger"
+            *ngIf="
+              regForm.get('email')?.touched && regForm.get('email')?.invalid
+            "
+          >
+            <div *ngIf="regForm.get('email')?.errors?.['required']">
+              email is required**
+            </div>
+            <div *ngIf="regForm.get('email')?.errors?.['email']">
+              invalid email**
+            </div>
+          </div>
+          <br />
+
+          <!-- Password Fields (Hidden in Edit Mode) -->
+          <ng-container *ngIf="!isEditMode">
+            <mat-form-field>
+              <input type="password" formControlName="password" matInput placeholder="Enter your password"/>
+              </mat-form-field>
+
+            <!-- Password validation errors -->
+            <div
+              class="text-danger"
+              *ngIf="
+                regForm.get('password')?.touched &&
+                regForm.get('password')?.invalid
+              "
+            >
+              <div *ngIf="regForm.get('password')?.errors?.['required']">
+                Password is required
+              </div>
+              <div *ngIf="regForm.get('password')?.errors?.['minlength']">
+                Password must be at least 6 characters long
+              </div>
+              <div
+                *ngIf="regForm.get('password')?.errors?.['passwordStrength']"
+              >
+                <div
+                  *ngIf="!regForm.get('password')?.errors?.['passwordStrength'].startsWithCapital"
+                >
+                  Password must start with a capital letter
+                </div>
+                <div
+                  *ngIf="!regForm.get('password')?.errors?.['passwordStrength'].hasNumbers"
+                >
+                  Password must contain at least one number
+                </div>
+                <div
+                  *ngIf="!regForm.get('password')?.errors?.['passwordStrength'].hasSpecialChar"
+                >
+                  Password must contain at least one special character
+                </div>
+              </div>
+            </div>
+            <br />
+            <mat-form-field>
+              <input type="password" formControlName="cPassword" matInput placeholder="Confirm Your Password"/>
+              </mat-form-field>
+            <br />
+
+            <!-- Password mismatch error message -->
+            <div *ngIf="passwordMismatch" class="text-danger">
+              Passwords do not match.
+            </div>
+            <br>
+            <!-- Image Upload Field -->
+              <input
+                type="file"
+                (change)="onFileChange($event)"
+                accept="image/*"
+                formControlName="image"
+              />
+          
+            <div *ngIf="uploadedFileName" class="file-info">
+            <img [src]="uploadedFileName" alt="" style="width: 100px;height: 100px;">
+            </div>
+            <br>
+          </ng-container>
+          <br>
+
+          <!-- Submit Button -->
+          <button mat-raised-button color="primary" type="submit">
+            {{ isEditMode ? "Save Changes" : "Register" }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!--
 <mat-card>
   <mat-card-header class="register_header">
     <mat-card-title class="register_title">
@@ -20,8 +179,7 @@
             class="text-danger"
             *ngIf="
               (regForm.get('fname')?.touched &&
-                regForm.get('fname')?.invalid) ||
-              (submitted && regForm.get('fname')?.invalid)
+                regForm.get('fname')?.invalid)
             "
           >
             <div *ngIf="regForm.get('fname')?.errors?.['required']">
@@ -41,8 +199,7 @@
             class="text-danger"
             *ngIf="
               (regForm.get('lname')?.touched &&
-                regForm.get('lname')?.invalid) ||
-              (submitted && regForm.get('lname')?.invalid)
+                regForm.get('lname')?.invalid) 
             "
           >
             <div *ngIf="regForm.get('lname')?.errors?.['required']">
@@ -62,8 +219,7 @@
             class="text-danger"
             *ngIf="
               (regForm.get('email')?.touched &&
-                regForm.get('email')?.invalid) ||
-              (submitted && regForm.get('email')?.invalid)
+                regForm.get('email')?.invalid) 
             "
           >
             <div *ngIf="regForm.get('email')?.errors?.['required']">
@@ -87,8 +243,7 @@
             class="text-danger"
             *ngIf="
               (regForm.get('password')?.touched &&
-                regForm.get('password')?.invalid) ||
-              (submitted && regForm.get('password')?.invalid)
+                regForm.get('password')?.invalid)
             "
           >
             <div *ngIf="regForm.get('password')?.errors?.['required']">
@@ -112,8 +267,7 @@
             class="text-danger"
             *ngIf="
               (regForm.get('cpassword')?.touched &&
-                regForm.get('cpassword')?.invalid) ||
-              (submitted && regForm.get('cpassword')?.invalid)
+                regForm.get('cpassword')?.invalid)
             "
           >
             <div *ngIf="regForm.get('cpassword')?.errors?.['missmatch']">
@@ -146,3 +300,4 @@
     </form>
   </mat-card-content>
 </mat-card>
+-->

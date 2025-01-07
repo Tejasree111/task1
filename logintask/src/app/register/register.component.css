@@ -1,18 +1,84 @@
-.alog{
-    /* margin:4px; */
-}
-.register_header{
+.register_header {
     text-align: center;
     font-size: 40px;
     justify-content: center;
 }
-.reset_button{
+
+.reset_button {
     margin: 15px;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
 }
-.div_button{
-    align-items: space-between;
+
+.div_button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-danger {
+    color: red;
+    font-size: 14px; /* Increased font size */
+}
+
+/* Center fields inside the card */
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-form-field {
+    width: 100%;
+    max-width: 450px; /* Enlarged the input field */
+    margin-bottom: 20px; /* Increased margin for better spacing */
+}
+
+input {
+    font-size: 16px; /* Increased font size for better readability */
+}
+
+button {
+    width: 100%;
+    max-width: 450px; /* Match button width with input field */
+    font-size: 16px; /* Increased font size */
+}
+
+/* Center the card */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
+    
+    padding: 0px;
+}
+
+mat-card {
+    width: 100%;
+    max-width: 450px; /* Enlarged card width */
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(27, 1, 88, 0.1);
+}
+
+mat-card-header {
+    text-align: center;
+}
+
+mat-card-title h1 {
+    font-size: 32px; /* Increased font size */
+    margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+    mat-card {
+        width: 90%;
+        max-width: none;
+    }
+
+    mat-card-title h1 {
+        font-size: 28px; /* Adjusted font size for smaller screens */
+    }
 }

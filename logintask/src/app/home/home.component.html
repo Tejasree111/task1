@@ -1,1 +1,65 @@
-<p>home works!</p>
+
+
+<div class="user-profile">
+  <div class="profile-image">
+    <img *ngIf="userData?.image" [src]="userData?.image" alt="image">
+  </div>
+    <div class="user-details" *ngIf="userData">
+        <h2>Welcome, {{ userData.fname }} {{ userData.lname }}</h2>
+        <p>Email: {{ userData.email }}</p>
+      </div>
+      <div *ngIf="!userData">
+        <p>You are not logged in.</p>
+      </div>
+      <div class="logout">
+        <button routerLink="logout" routerLinkActive="router-link-active"  (click)="logout()">Logout</button>
+      </div>
+      
+</div>
+
+
+<div class="div-table" *ngIf="userData">
+  <h1 class="users-header">User's List</h1>
+  <table>
+  
+      <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    
+      <!--| slice:0:10 --><!--you can also use slice pipe to only display a limit of users on the ui-->
+      <tr *ngFor="let user of users ">
+        <td>{{ user.Id }}</td>
+        <td>{{ user.fname }}</td>
+        <td>{{ user.lname }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+
+        <div class="div-button">
+           <!-- Edit button (only enabled for admin or user self) -->
+      <button
+        [disabled]="!isAdmin && currentUserId !== user.Id"
+        (click)="editUser(user)"
+      >
+        Edit
+      </button>
+      <!-- Delete button (only enabled for admin or user self) -->
+      <button class="del-button"
+        [disabled]="!isAdmin && currentUserId !== user.Id"
+        (click)="deleteUser(user.Id)"
+      >
+        Delete </button>
+        </div>
+        </td>
+      </tr>
+   
+  </table>
+  
+</div>
+
+<div class="download" *ngIf="userData">
+  <button (click)="downloadTableAsExcel()">Download</button>
+</div>

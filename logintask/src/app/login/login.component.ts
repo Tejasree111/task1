@@ -1,24 +1,21 @@
-
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from 'src/Material.Module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+//import { CommonModule } from '@angular/common';
+//import { MaterialModule } from 'src/Material.Module';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(private fb: FormBuilder, private loginService: LoginService) {
     this.loginForm = this.fb.group({
+      type:['',Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
@@ -31,26 +28,8 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
     const loginData = this.loginForm.value;
-
-    
-    this.http.post<{ success: boolean, message: string, token?: string }>('http://localhost:3000/api/login', loginData).subscribe({
-      next: (response) => {
-        if (response.success) {
-          localStorage.setItem('token', response.token || '');
-          this.router.navigate(['/home']);
-        } else {
-          alert('Invalid email or password');
-        }
-      },
-      error: (error) => {
-        console.error('Login error', error);
-        alert('An error occurred during login');
-      },
-      complete: () => {
-        console.log('Login request completed');
-      }
-    });
+    this.loginService.login(loginData);
   }
+ 
 }

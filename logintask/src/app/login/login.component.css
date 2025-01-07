@@ -1,0 +1,88 @@
+.login_header {
+    text-align: center;
+    font-size: 40px;
+    justify-content: center;
+}
+
+
+.text-danger {
+    color: red;
+    font-size: 14px;
+}
+
+/* Center fields inside the card */
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-form-field {
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 20px;
+}
+
+input {
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    max-width: 450px;
+    font-size: 16px;
+}
+
+/* Container to center the card */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 0px;
+    margin-top: 0;
+}
+
+/* Mat card styling */
+mat-card {
+    width: 100%;
+    max-width: 500px; /* Adjust to your preference */
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.login_header {
+    text-align: center;
+}
+
+.login_title h1 {
+    font-size: 32px; /* Font size in px */
+    margin-bottom: 10px;
+}
+
+/* Input field styling */
+mat-form-field {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    mat-card {
+        width: 90%;
+        max-width: none;
+    }
+
+    .login_title h1 {
+        font-size: 24px;
+    }
+}

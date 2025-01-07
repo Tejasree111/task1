@@ -1,0 +1,86 @@
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 20px 20px;
+    font-size: 1em;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  .users-header{
+    text-align: center;
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .user-profile {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr; /* Defines three columns */
+    gap: 20px;
+    padding: 20px;
+    max-width: 600px; /* Optional: Limit the width of the card */
+    margin: 20px auto; /* Center the card horizontally */
+    background-color: #fff; /* White background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Card shadow */
+    border: 1px solid #ddd; /* Optional border */
+  }
+  
+  .profile-image {
+    max-width: 120px;
+    border-radius: 50%; /* Makes the image circular */
+    overflow: hidden;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .user-details {
+    text-align: left;
+    font-size: 16px;
+  }
+  
+  .logout {
+    text-align: center;
+  }
+  
+ 
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  .del-button{
+    background-color: #c53003;
+    color: white;
+  }
+  .del-button:hover{
+    background-color: #661a02;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  .download{
+    display: flex;
+    justify-content: center;
+  }
